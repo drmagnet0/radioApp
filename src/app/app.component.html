@@ -1,0 +1,41 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Radio App</span>
+    <span class="example-spacer"></span>
+    <mat-icon class="example-icon" (click)="startSearch()" *ngIf="!search">search</mat-icon>
+    <mat-icon class="example-icon" (click)="startSearch()" *ngIf="search">close</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<form class="example-form" *ngIf="search">
+  <!-- <md-input #myInput placeholder="search" [(ngModel)]="name" (input)="filterItem(myInput.value)"></md-input> -->
+  <mat-form-field class="example-full-width">
+    <input matInput #myInput placeholder="Search on radios" (input)="filterItem(myInput.value)">
+  </mat-form-field>
+  <mat-selection-list>
+    <div *ngFor="let radio of filteredItems; let inx = index">
+      <mat-list-item *ngIf="radio.isFavourite != true">
+        <b>{{radio.name}}</b>
+        <mat-icon matListIcon color="warn" class="removeBtn" (click)="addToFav(radio)">add_circle</mat-icon>
+      </mat-list-item>
+    </div>
+  </mat-selection-list>
+</form>
+
+<mat-selection-list *ngIf="!search">
+  <div *ngFor="let radio of radios; let inx = index">
+    <mat-list-item *ngIf="radio.isFavourite != false" [ngClass]="{'selected': radio.selected}">
+      <img src="{{radio.img}}" alt="" *ngIf="radio.selected == true">
+      <b (click)="selectToPlay(radio)">{{radio.name}}</b>
+      <div *ngIf="radio.selected == true">
+        <mat-icon matListIcon color="warn" (click)="play(radio)" *ngIf="radio.status == 'paused'">play_circle_filled</mat-icon>
+        <mat-icon matListIcon color="warn" (click)="pause(radio)" *ngIf="radio.status == 'played' || radio.status == 'muted'">pause_circle_filled</mat-icon>
+        <mat-icon matListIcon color="warn" (click)="mute(radio)" *ngIf="radio.status == 'muted'">volume_off</mat-icon>
+        <mat-icon matListIcon color="warn" (click)="mute(radio)" *ngIf="radio.status == 'played' && radio.status != 'muted'">volume_up</mat-icon>
+      </div>
+      <mat-icon matListIcon color="warn" class="removeBtn" (click)="removeFromFav(radio)">remove_circle</mat-icon>
+    </mat-list-item>
+  </div>
+</mat-selection-list>
+
+<button *ngIf="!search" mat-raised-button color="warn" (click)="saveFavList()">Save List</button>

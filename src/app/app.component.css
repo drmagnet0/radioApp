@@ -1,0 +1,51 @@
+.mat-list, .mat-nav-list:focus,
+.mat-selection-list:focus {
+    outline: none !important;
+}
+mat-list-item > div {
+    padding: 0 !important;
+}
+mat-list-item {
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+mat-list-item.selected {
+    height: 100px !important;
+}
+mat-list-item:hover .removeBtn {
+    opacity: 1;
+    transition: 0.5s all ease-in-out;
+}
+mat-list-item img {
+    width: 100px;
+    height: 100px;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+.removeBtn {
+    opacity: 0;
+    transition: 0.5s all ease-in-out;
+}
+.example-icon {
+    padding: 0 14px;
+    cursor: pointer;
+}
+.example-spacer {
+flex: 1 1 auto;
+}
+.example-form {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.example-full-width {
+    width: 97%;
+    margin: 0 auto;
+    float: none;
+    display: block;
+}
+
+button {
+    width: 100%;
+}
